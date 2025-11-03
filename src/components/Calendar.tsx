@@ -129,7 +129,7 @@ const Calendar: React.FC<CalendarProps> = ({ workspaceId }) => {
   return (
     <div className="p-6 text-white">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Calendário</h2>
+        <h2 className="text-2xl font-bold">Eventos cadastrados</h2>
         <div className="flex items-center gap-4">
           {/* Botões de alternância de layout */}
           <div className="flex bg-gray-700 rounded-lg p-1">
@@ -290,17 +290,7 @@ const Calendar: React.FC<CalendarProps> = ({ workspaceId }) => {
       <ConfirmDeleteModal
         isOpen={showDeleteModal}
         title="Excluir Evento"
-        message={
-          eventToDelete
-            ? `Tem certeza que deseja excluir o evento "${
-                eventToDelete.name
-              }"?\n\nPeríodo: ${formatDate(
-                eventToDelete.startDate
-              )} - ${formatDate(
-                eventToDelete.endDate
-              )}\n\nEsta ação não pode ser desfeita.`
-            : ""
-        }
+        message={eventToDelete ? `Excluir o evento ${eventToDelete.name}?` : ""}
         onConfirm={confirmDeleteEvent}
         onCancel={cancelDeleteEvent}
         confirmText="Excluir"

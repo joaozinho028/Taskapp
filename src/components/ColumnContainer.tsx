@@ -173,7 +173,7 @@ const ColumnContainer = (props: Props) => {
       <ConfirmDeleteModal
         isOpen={showDeleteModal}
         title="Excluir Coluna"
-        message={`Tem certeza que deseja excluir a coluna "${column.title}"?\n\nTodas as tarefas desta coluna também serão excluídas.\n\nEsta ação não pode ser desfeita.`}
+        message={`Excluir a coluna ${column.title}?`}
         onConfirm={confirmDelete}
         onCancel={cancelDelete}
         confirmText="Excluir"

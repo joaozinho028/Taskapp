@@ -131,7 +131,7 @@ const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
       <ConfirmDeleteModal
         isOpen={showDeleteModal}
         title="Excluir Tarefa"
-        message={`Tem certeza que deseja excluir a tarefa:\n\n"${task.content}"\n\nEsta ação não pode ser desfeita.`}
+        message={`Excluir a tarefa ${task.content}?`}
         onConfirm={confirmDelete}
         onCancel={cancelDelete}
         confirmText="Excluir"
