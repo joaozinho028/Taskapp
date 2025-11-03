@@ -24,3 +24,11 @@ export type Event = {
   endDate: string;
   observation?: string;
 };
+
+export type Note = {
+  id: Id;
+  title: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+};

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Column, Id } from "../types";
 import Calendar from "./Calendar";
 import KanbanBoard from "./KanbanBoard";
+import Notes from "./NotesSimple";
 
 interface TabContainerProps {
   workspaceId: Id;
@@ -9,7 +10,7 @@ interface TabContainerProps {
   onColumnsChange: (columns: Column[]) => void;
 }
 
-type TabType = "kanban" | "calendar";
+type TabType = "kanban" | "calendar" | "notes";
 
 const TabContainer: React.FC<TabContainerProps> = ({
   workspaceId,
@@ -21,6 +22,7 @@ const TabContainer: React.FC<TabContainerProps> = ({
   const tabs = [
     { id: "kanban" as TabType, label: "Kanban" },
     { id: "calendar" as TabType, label: "Eventos" },
+    { id: "notes" as TabType, label: "Anotações" },
   ];
 
   return (
@@ -50,6 +52,7 @@ const TabContainer: React.FC<TabContainerProps> = ({
           <KanbanBoard columns={columns} onColumnsChange={onColumnsChange} />
         )}
         {activeTab === "calendar" && <Calendar workspaceId={workspaceId} />}
+        {activeTab === "notes" && <Notes workspaceId={workspaceId} />}
       </div>
     </div>
   );
