@@ -145,7 +145,7 @@ const WorkspaceList: React.FC<WorkspaceListProps> = ({
       </div>
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
-          <div className="bg-gray-900 p-6 rounded shadow-lg text-white w-80">
+          <div className="bg-gray-900 p-6 rounded shadow-lg text-white w-96 max-w-lg mx-4">
             <div className="mb-4">
               Tem certeza que deseja excluir esta área de trabalho?
             </div>

@@ -3,6 +3,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
 import TrashIcon from "../icons/TrashIcon";
 import { Id, Task } from "../types";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
 interface Props {
   task: Task;
@@ -13,6 +14,7 @@ interface Props {
 const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
   const [mouseIsOver, setMouseIsOver] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const {
     setNodeRef,
     attributes,
@@ -32,6 +34,19 @@ const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
 
   const toggleEditMode = () => {
     setEditMode((prev) => !prev);
+  };
+
+  const handleDeleteClick = () => {
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = () => {
+    deleteTask(task.id);
+    setShowDeleteModal(false);
+  };
+
+  const cancelDelete = () => {
+    setShowDeleteModal(false);
   };
 
   if (isDragging) {
@@ -101,8 +116,9 @@ const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
       </p>
       {mouseIsOver && (
         <button
-          onClick={() => {
-            deleteTask(task.id);
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDeleteClick();
           }}
           className="stroke-white absolute right-4 top-1/2
                     -translate-y-1/2 bg-gray-900 p-2 rounded"
@@ -110,6 +126,17 @@ const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
           <TrashIcon />
         </button>
       )}
+
+      {/* Modal de confirmação de exclusão */}
+      <ConfirmDeleteModal
+        isOpen={showDeleteModal}
+        title="Excluir Tarefa"
+        message={`Tem certeza que deseja excluir a tarefa:\n\n"${task.content}"\n\nEsta ação não pode ser desfeita.`}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+        confirmText="Excluir"
+        cancelText="Cancelar"
+      />
     </div>
   );
 };

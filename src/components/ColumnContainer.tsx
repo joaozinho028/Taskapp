@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import PlusIcon from "../icons/PlusIcon";
 import TrashIcon from "../icons/TrashIcon";
 import { Column, Id, Task } from "../types";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import TaskCard from "./TaskCard";
 
 interface Props {
@@ -18,6 +19,7 @@ interface Props {
 
 const ColumnContainer = (props: Props) => {
   const [editMode, setEditMode] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const {
     column,
     deleteColumn,
@@ -45,6 +47,19 @@ const ColumnContainer = (props: Props) => {
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
+  };
+
+  const handleDeleteClick = () => {
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = () => {
+    deleteColumn(column.id);
+    setShowDeleteModal(false);
+  };
+
+  const cancelDelete = () => {
+    setShowDeleteModal(false);
   };
 
   if (isDragging) {
@@ -112,8 +127,9 @@ const ColumnContainer = (props: Props) => {
           )}
         </div>
         <button
-          onClick={() => {
-            deleteColumn(column.id);
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDeleteClick();
           }}
           className="stroke-gray-500
                     hover:stroke-white
@@ -152,6 +168,17 @@ const ColumnContainer = (props: Props) => {
         <PlusIcon />
         Nova Tarefa
       </button>
+
+      {/* Modal de confirmação de exclusão */}
+      <ConfirmDeleteModal
+        isOpen={showDeleteModal}
+        title="Excluir Coluna"
+        message={`Tem certeza que deseja excluir a coluna "${column.title}"?\n\nTodas as tarefas desta coluna também serão excluídas.\n\nEsta ação não pode ser desfeita.`}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+        confirmText="Excluir"
+        cancelText="Cancelar"
+      />
     </div>
   );
 };

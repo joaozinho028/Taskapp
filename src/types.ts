@@ -16,3 +16,11 @@ export type Workspace = {
   name: string;
   columns: Column[];
 };
+
+export type Event = {
+  id: Id;
+  name: string;
+  startDate: string;
+  endDate: string;
+  observation?: string;
+};
