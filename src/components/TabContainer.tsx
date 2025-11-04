@@ -26,9 +26,9 @@ const TabContainer: React.FC<TabContainerProps> = ({
   ];
 
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col">
       {/* Navegação das abas */}
-      <div className="bg-gray-900 border-b border-gray-700">
+      <div className="flex-shrink-0 bg-gray-900 border-b border-gray-700">
         <div className="flex space-x-0">
           {tabs.map((tab) => (
             <button
@@ -47,7 +47,7 @@ const TabContainer: React.FC<TabContainerProps> = ({
       </div>
 
       {/* Conteúdo das abas */}
-      <div className="flex-1">
+      <div className="flex-1 overflow-hidden">
         {activeTab === "kanban" && (
           <KanbanBoard columns={columns} onColumnsChange={onColumnsChange} />
         )}

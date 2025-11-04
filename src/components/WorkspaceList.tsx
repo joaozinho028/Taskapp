@@ -81,7 +81,7 @@ const WorkspaceList: React.FC<WorkspaceListProps> = ({
 
   return (
     <div className="p-8 flex flex-col items-center bg-black min-h-screen">
-      <h1 className="text-2xl font-bold mb-6 text-white">Áreas de Trabalho</h1>
+      {/* <h1 className="text-2xl font-bold mb-6 text-white">Workspaces</h1> */}
       <div className="w-full max-w-md mb-6">
         <div className="flex gap-2 mb-6">
           <input

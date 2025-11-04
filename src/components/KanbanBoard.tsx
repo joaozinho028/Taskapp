@@ -160,15 +160,27 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
   }
 
   return (
-    <div className="m-auto flex min-h-screen w-full items-center px-[40px] bg-black">
+    <div className="min-h-screen w-full bg-black relative">
+      {/* Botão Adicionar Coluna - Posicionado no canto superior direito */}
+      <button
+        onClick={createNewColumn}
+        className="fixed top-4 right-4 z-10 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 shadow-lg transition-colors"
+      >
+        <PlusIcon />
+        Adicionar Coluna
+      </button>
+
       <DndContext
         sensors={sensors}
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
         onDragOver={onDragOver}
       >
-        <div className="m-auto flex gap-4">
-          <div className="flex gap-4">
+        <div className="flex items-center justify-center min-h-screen px-4 py-6">
+          <div
+            className="flex gap-4 overflow-x-auto overflow-y-hidden w-full kanban-scroll justify-start"
+            style={{ maxWidth: "calc(100vw - 260px)" }}
+          >
             <SortableContext items={columnsId}>
               {columns.map((col) => (
                 <ColumnContainer
@@ -183,24 +195,21 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
                 />
               ))}
             </SortableContext>
+            {/* Placeholder para quando não há colunas */}
+            {columns.length === 0 && (
+              <div className="flex items-center justify-center w-full h-[400px] text-gray-400 text-center">
+                <div className="max-w-md mx-auto">
+                  <p className="text-xl mb-3 font-medium">
+                    Nenhuma coluna criada ainda
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Clique em "Adicionar Coluna" no canto superior direito para
+                    começar a organizar suas tarefas
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
-          {columns.length > 0 ? (
-            <button
-              onClick={createNewColumn}
-              className="-[60px] w-[350px] min-w-[350px] cursor-pointer rounded-lg bg-gray-900 border-2 border-gray-800 p-4 ring-rose-500 hover:ring-2 flex gap-2 text-white"
-            >
-              <PlusIcon />
-              Adicionar Coluna
-            </button>
-          ) : (
-            <button
-              onClick={createNewColumn}
-              className="w-[350px] min-w-[350px] cursor-pointer rounded-lg bg-gray-900 border-2 border-gray-800 p-4 ring-rose-500 hover:ring-2 flex gap-2 m-auto text-white"
-            >
-              <PlusIcon />
-              Adicionar Coluna
-            </button>
-          )}
         </div>
         {createPortal(
           <DragOverlay>

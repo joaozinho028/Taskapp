@@ -68,10 +68,10 @@ const ColumnContainer = (props: Props) => {
         ref={setNodeRef}
         style={style}
         className="bg-gray-900
-        w-[350px] h-[500px]
+        w-[320px] h-[600px]
         border-2 border-rose-500
-        max-h-[500px] rounded-md
-        flex flex-col"
+        max-h-[600px] rounded-md
+        flex flex-col mb-4"
       ></div>
     );
   }
@@ -81,9 +81,9 @@ const ColumnContainer = (props: Props) => {
       ref={setNodeRef}
       style={style}
       className="bg-gray-900
-        w-[350px] h-[500px]
-        max-h-[500px] rounded-md
-        flex flex-col"
+        w-[320px] min-w-[320px] h-[600px]
+        max-h-[600px] rounded-md mb-20
+        flex flex-col flex-shrink-0"
     >
       {/* Column Title*/}
       <div
